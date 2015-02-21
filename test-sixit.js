@@ -48,3 +48,9 @@ run({
   original: 'var foo = 1;',
   expected: 'let foo = 1;',
 })
+
+run({
+  subject: 'empty init does not fail',
+  original: 'var foo;',
+  expected: 'let foo;',
+})
