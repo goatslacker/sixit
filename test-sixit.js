@@ -1,5 +1,5 @@
 var assert = require('assert')
-var sixit = require('./sixit')
+var sixit = require('./')
 
 function run(o) {
   var actual = sixit(o.original)
@@ -28,7 +28,7 @@ run({
 run({
   subject: 'module.exports',
   original: 'module.exports = Foo;',
-  expected: 'export default Foo;',
+  expected: 'export default Foo;;',
 })
 
 run({

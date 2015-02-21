@@ -6,6 +6,9 @@
   "scripts": {
     "test": "node test-sixit.js"
   },
+  "bin": {
+    "sixit": "./bin/sixit"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/goatslacker/sixit"
@@ -24,5 +27,10 @@
   "bugs": {
     "url": "https://github.com/goatslacker/sixit/issues"
   },
-  "homepage": "https://github.com/goatslacker/sixit"
+  "homepage": "https://github.com/goatslacker/sixit",
+  "dependencies": {
+    "esprima-fb": "^12001.1.0-dev-harmony-fb",
+    "fu": "^0.1.0",
+    "recast": "^0.10.0"
+  }
 }

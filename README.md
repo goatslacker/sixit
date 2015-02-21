@@ -6,6 +6,20 @@ Code goes in, ES6 comes out.
 
 ![six it six it six it six it](/sixit.gif)
 
+### Installing
+
+```sh
+npm install sixit
+```
+
+### Sixing your files
+
+```js
+sixit directory
+```
+
+### Programatically Using it
+
 ```js
 var sixit = require('sixit')
 var magicalAwesomeCode = sixit(yourBoringCode)
