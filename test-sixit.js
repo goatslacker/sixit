@@ -2,7 +2,9 @@ var assert = require('assert')
 var sixit = require('./')
 
 var allOptions = {
+  exports: false,
   method: false,
+  module: false,
   shorthand: false,
   strict: false
 }
@@ -33,9 +35,21 @@ run({
 })
 
 run({
-  subject: 'module.exports',
+  subject: 'module.exports for module',
   original: 'module.exports = Foo;',
   expected: 'export default Foo;;',
+}, { module: true })
+
+run({
+  subject: 'module.exports for exports',
+  original: 'module.exports = Foo;',
+  expected: 'export default Foo;;',
+}, { exports: true })
+
+run({
+  subject: 'do not convert module.exports',
+  original: 'module.exports = Foo;',
+  expected: 'module.exports = Foo;',
 })
 
 run({

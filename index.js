@@ -138,7 +138,7 @@ function sixit(code, opts) {
       }
 
     // module.exports to export
-    } else if (isExport(node)) {
+    } else if ((opts.module || opts.exports) && isExport(node)) {
       return {
         type: 'ExportDeclaration',
         default: true,
