@@ -3,6 +3,8 @@ var sixit = require('./')
 
 var allOptions = {
   exports: false,
+  imports: false,
+  let: false,
   method: false,
   module: false,
   shorthand: false,
@@ -12,7 +14,7 @@ var allOptions = {
 function run(test, opts) {
   opts = opts || allOptions
   var actual = sixit(test.original, opts)
-  assert.equal(actual, test.expected)
+  assert.equal(actual, test.expected, test.subject)
 }
 
 
@@ -20,19 +22,31 @@ run({
   subject: 'regular single imports',
   original: 'var _ = require("lodash");',
   expected: 'import _ from "lodash";',
-})
+}, { imports: true })
+
+run({
+  subject: 'regular single imports with module option',
+  original: 'var _ = require("lodash");',
+  expected: 'import _ from "lodash";',
+}, { module: true })
+
+run({
+  subject: 'one-var style imports. imports are extracted',
+  original: 'var _ = require("lodash"), a = 12;',
+  expected: 'import _ from "lodash";\nvar a = 12;',
+}, { imports: true })
 
 run({
   subject: 'one-var style imports, var is converted to let',
   original: 'var _ = require("lodash"), a = 12;',
   expected: 'import _ from "lodash";\nlet a = 12;',
-})
+}, { imports: true, let: true })
 
 run({
-  subject: 'let works too',
+  subject: 'let works too, and let is left alone despite let conversion is false',
   original: 'let _ = require("lodash"), a = 12;',
   expected: 'import _ from "lodash";\nlet a = 12;',
-})
+}, { imports: true, let: false })
 
 run({
   subject: 'module.exports for module',
@@ -50,7 +64,7 @@ run({
   subject: 'do not convert module.exports',
   original: 'module.exports = Foo;',
   expected: 'module.exports = Foo;',
-})
+}, { exports: false })
 
 run({
   subject: 'convert object methods to concise',
@@ -80,13 +94,19 @@ run({
   subject: 'convert var to let',
   original: 'var foo = 1;',
   expected: 'let foo = 1;',
-})
+}, { let: true })
 
 run({
   subject: 'empty init does not fail',
   original: 'var foo;',
   expected: 'let foo;',
-})
+}, { let: true })
+
+run({
+  subject: 'empty init no conversion',
+  original: 'var foo;',
+  expected: 'var foo;',
+}, { let: false })
 
 run({
   subject: 'adds use strict',

@@ -119,22 +119,32 @@ function sixit(code, opts) {
     // TODO
     // convert all functions to arrow functions? at least ones that define bind.
     // convert all string concatenation to template literal tags
-    // TODO
-    // make all these options configurable
 
-    // require to import.
-    // and var to let
     if (node.type === 'VariableDeclaration') {
-      var results = turnDeclarationsIntoImport(node.declarations)
 
-      if (results.v.length) {
-        return results.i.concat([{
+      // require to import.
+      if (opts.module || opts.imports) {
+        var results = turnDeclarationsIntoImport(node.declarations)
+
+        if (results.v.length) {
+          return results.i.concat([{
+            type: 'VariableDeclaration',
+            declarations: results.v,
+            kind: opts.let ? 'let' : node.kind
+          }])
+        } else {
+          return results.i
+        }
+
+      // and var to let
+      } else if (opts.let) {
+        return {
           type: 'VariableDeclaration',
-          declarations: results.v,
+          declarations: node.declarations,
           kind: 'let'
-        }])
+        }
       } else {
-        return results.i
+        return node
       }
 
     // module.exports to export
@@ -153,6 +163,7 @@ function sixit(code, opts) {
     }
   })
 
+  // add use strict
   if (opts.strict && !isStrict(modified)) {
     addStrict(modified)
   }
