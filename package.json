@@ -1,0 +1,28 @@
+{
+  "name": "sixit",
+  "version": "1.0.0",
+  "description": "Turn your vanilla JavaScript into a Venti Iced Skinny Hazelnut Macchiato, Sugar-Free Syrup, Extra Shot, Light Ice, No Whip JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test-sixit.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goatslacker/sixit"
+  },
+  "keywords": [
+    "es6",
+    "es2015",
+    "recast",
+    "ast",
+    "transform",
+    "transpile",
+    "babel"
+  ],
+  "author": "Josh Perez <josh@goatslacker.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/goatslacker/sixit/issues"
+  },
+  "homepage": "https://github.com/goatslacker/sixit"
+}
