@@ -79,13 +79,13 @@ function turnDeclarationsIntoImport(declarations) {
   }, { i: [], v: [] })
 }
 
-function conciseAllMethods(node) {
+function conciseAllMethods(node, opts) {
   return {
     type: 'ObjectExpression',
     properties: node.properties.map(function (prop) {
-      if (prop.value.type === 'FunctionExpression') {
+      if (opts.method && prop.value.type === 'FunctionExpression') {
         prop.method = true
-      } else if (isShorthand(prop)) {
+      } else if (opts.shorthand && isShorthand(prop)) {
         prop.shorthand = true
       }
       return prop
@@ -146,8 +146,8 @@ function sixit(code, opts) {
       }
 
     // object concise (shorthand + method)
-    } else if (node.type === 'ObjectExpression') {
-      return conciseAllMethods(node)
+    } else if ((opts.shorthand || opts.method) && node.type === 'ObjectExpression') {
+      return conciseAllMethods(node, opts)
     } else {
       return node
     }
