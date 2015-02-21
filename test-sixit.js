@@ -1,9 +1,10 @@
 var assert = require('assert')
 var sixit = require('./')
 
-function run(o) {
-  var actual = sixit(o.original)
-  assert.equal(actual, o.expected)
+function run(test, opts) {
+  opts = opts || { strict: false }
+  var actual = sixit(test.original, opts)
+  assert.equal(actual, test.expected)
 }
 
 
@@ -54,3 +55,9 @@ run({
   original: 'var foo;',
   expected: 'let foo;',
 })
+
+run({
+  subject: 'adds use strict',
+  original: '2;',
+  expected: '"use strict";\n2;',
+}, { strict: true })

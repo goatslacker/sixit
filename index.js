@@ -93,8 +93,27 @@ function conciseAllMethods(node) {
   }
 }
 
+function isStrict(nodes) {
+  return nodes.program &&
+    nodes.program.body.length &&
+    nodes.program.body[0].type === 'ExpressionStatement' &&
+    nodes.program.body[0].expression.type === 'Literal' &&
+    nodes.program.body[0].expression.value === 'use strict'
+}
+
+function addStrict(nodes) {
+  nodes.program.body.unshift({
+    type: 'ExpressionStatement',
+    expression: {
+      type: 'Literal',
+      value: 'use strict'
+    }
+  })
+}
+
 function sixit(code, opts) {
   var ast = recast.parse(code)
+
   var modified = traverse(ast, function (node, parent) {
 
     // TODO
@@ -133,6 +152,10 @@ function sixit(code, opts) {
       return node
     }
   })
+
+  if (opts.strict && !isStrict(modified)) {
+    addStrict(modified)
+  }
 
   var generatedCode = recast.print(modified).code
 
