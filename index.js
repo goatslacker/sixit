@@ -36,6 +36,7 @@ function traverse(o, f, p) {
 
 function isRequire(node) {
   return node.type === 'VariableDeclarator' &&
+    node.init &&
     node.init.type === 'CallExpression' &&
     node.init.callee.type === 'Identifier' &&
     node.init.callee.name === 'require'
