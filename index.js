@@ -111,6 +111,13 @@ function addStrict(nodes) {
   })
 }
 
+function isBind(node) {
+  return node.callee.type === 'MemberExpression' &&
+    (node.callee.object.type === 'FunctionExpression' || node.callee.object.type === 'ArrowFunctionExpression') &&
+    node.callee.property.type === 'Identifier' &&
+    node.callee.property.name === 'bind'
+}
+
 function sixit(code, opts) {
   var ast = recast.parse(code)
 
@@ -158,6 +165,22 @@ function sixit(code, opts) {
     // object concise (shorthand + method)
     } else if ((opts.shorthand || opts.method) && node.type === 'ObjectExpression') {
       return conciseAllMethods(node, opts)
+
+    } else if (opts.arrow && node.type === 'CallExpression') {
+      if (isBind(node)) {
+        return node.callee.object
+      } else {
+        return node
+      }
+    } else if (opts.arrow && node.type === 'FunctionExpression') {
+      return {
+        type: 'ArrowFunctionExpression',
+        params: node.params,
+        defaults: node.defaults,
+        body: node.body,
+        rest: node.rest
+      }
+
     } else {
       return node
     }

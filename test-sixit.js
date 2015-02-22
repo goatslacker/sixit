@@ -2,6 +2,7 @@ var assert = require('assert')
 var sixit = require('./')
 
 var allOptions = {
+  arrow: false,
   exports: false,
   imports: false,
   let: false,
@@ -12,9 +13,23 @@ var allOptions = {
 }
 
 function run(test, opts) {
-  opts = opts || allOptions
+  Object.keys(allOptions).forEach(function (key) {
+    opts[key] = opts[key] || allOptions[key]
+  })
   var actual = sixit(test.original, opts)
-  assert.equal(actual, test.expected, test.subject)
+
+  var subject = [
+    test.subject,
+    '',
+    '// Expected',
+    test.expected,
+    '',
+    '// Actual',
+    actual,
+    ''
+  ].join('\n')
+
+  assert.equal(actual, test.expected, subject)
 }
 
 
@@ -119,3 +134,21 @@ run({
   original: '2;',
   expected: '2;',
 }, { strict: false })
+
+run({
+  subject: 'convert to arrow function',
+  original: 'var a = function () {\n};',
+  expected: 'var a = () => {\n};',
+}, { arrow: true })
+
+run({
+  subject: 'do not convert to arrow function',
+  original: 'var a = function () {\n};',
+  expected: 'var a = function () {\n};',
+}, { arrow: false })
+
+run({
+  subject: 'drop the bind',
+  original: 'var a = function () {\n}.bind(this);',
+  expected: 'var a = () => {\n};',
+}, { arrow: true })
