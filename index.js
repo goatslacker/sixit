@@ -122,11 +122,6 @@ function sixit(code, opts) {
   var ast = recast.parse(code)
 
   var modified = traverse(ast, function (node, parent) {
-
-    // TODO
-    // convert all functions to arrow functions? at least ones that define bind.
-    // convert all string concatenation to template literal tags
-
     if (node.type === 'VariableDeclaration') {
 
       // require to import.
