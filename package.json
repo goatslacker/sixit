@@ -1,7 +1,7 @@
 {
   "name": "sixit",
   "version": "1.0.0",
-  "description": "Turn your vanilla JavaScript into a Venti Iced Skinny Hazelnut Macchiato, Sugar-Free Syrup, Extra Shot, Light Ice, No Whip JavaScript",
+  "description": "Turn your vanilla Java Script into a Venti Iced Skinny Hazelnut Macchiato, Sugar-Free Syrup, Extra Shot, Light Ice, No Whip Script",
   "main": "lib/index.js",
   "scripts": {
     "test": "node test/"
@@ -32,5 +32,17 @@
     "esprima-fb": "^12001.1.0-dev-harmony-fb",
     "fu": "^0.1.0",
     "recast": "^0.10.0"
+  },
+  "sixit": {
+    "options": {
+      "arrow": false,
+      "exports": false,
+      "imports": false,
+      "let": true,
+      "method": true,
+      "module": false,
+      "shorthand": true,
+      "strict": true
+    }
   }
 }
