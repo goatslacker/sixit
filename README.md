@@ -4,7 +4,7 @@
 
 Code goes in, ES6 comes out.
 
-![six it six it six it six it](/sixit.gif)
+![six it six it six it six it](/assets/sixit.gif)
 
 ### Installing
 

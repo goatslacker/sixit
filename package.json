@@ -2,9 +2,9 @@
   "name": "sixit",
   "version": "1.0.0",
   "description": "Turn your vanilla JavaScript into a Venti Iced Skinny Hazelnut Macchiato, Sugar-Free Syrup, Extra Shot, Light Ice, No Whip JavaScript",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "node test-sixit.js"
+    "test": "node test/"
   },
   "bin": {
     "sixit": "./bin/sixit"

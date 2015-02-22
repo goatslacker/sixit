@@ -1,5 +1,5 @@
 var assert = require('assert')
-var sixit = require('./')
+var sixit = require('../')
 
 var allOptions = {
   arrow: false,
