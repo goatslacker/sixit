@@ -47,14 +47,14 @@ If an options object is passed to sixit it overrides all the options.
 }
 ```
 
-`arrow` transforms function expressions into arrow functions
-`exports` transforms module.exports to export syntax
-`imports` transforms require into import syntax
-`let` converts all your vars into let
-`method` converts methods in object expressions into concise form
-`module` is a catch-all that does both import and export
-`shorthand` converts properties that have the same key/value into concise
-`strict` adds the use strict pragma at the top of the file
+* `arrow` transforms function expressions into arrow functions
+* `exports` transforms module.exports to export syntax
+* `imports` transforms require into import syntax
+* `let` converts all your vars into let
+* `method` converts methods in object expressions into concise form
+* `module` is a catch-all that does both import and export
+* `shorthand` converts properties that have the same key/value into concise
+* `strict` adds the use strict pragma at the top of the file
 
 ## License
 
