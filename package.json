@@ -1,6 +1,6 @@
 {
   "name": "sixit",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Turn your vanilla Java Script into a Venti Iced Skinny Hazelnut Macchiato, Sugar-Free Syrup, Extra Shot, Light Ice, No Whip Script",
   "main": "lib/index.js",
   "scripts": {
